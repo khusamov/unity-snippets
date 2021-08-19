@@ -77,15 +77,17 @@ public class Hero : MonoBehaviour
 
     void Run()
     {
-        if (isGrounded) State = HeroStates.run;
 
+        // Вычисление направление движения персонажа.
+        // После вычисления dir равен {(-1..+1), 0, 0}.
         Vector3 dir = transform.right * Input.GetAxis("Horizontal");
 
+        // Вычисление новых координат персонажа (по оси X).
         transform.position = (
             Vector3.MoveTowards(
-                transform.position,
-                transform.position + dir,
-                speed * Time.deltaTime
+                transform.position, // Старая позиция.
+                transform.position + dir, // Куда надо попасть (по сути направление от старой позиции).
+                speed * Time.deltaTime // На какое расстояние надо передвинуться.
             )
         );
 
